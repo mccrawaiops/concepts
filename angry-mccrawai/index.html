@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0a0a09">
+<title>McCrawAI — Angry demo (not the live site)</title>
+<meta name="description" content="A design demo of an angry McCrawAI homepage. Not the live site. Live site: https://mccrawai.com">
+<link rel="canonical" href="https://mccrawai.com/">
+<style>
+@font-face{font-family:"Instrument Serif";src:url("https://mccrawai.com/fonts/instrument.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url("https://mccrawai.com/fonts/instrument-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Hanken Grotesk";src:url("https://mccrawai.com/fonts/hanken.woff2") format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+
+:root{
+  --ink:#0a0a09;
+  --ink-2:#120e0c;
+  --bone:#ece6da;
+  --bone-2:#b9b2a5;
+  --mute:#968f82;
+  --gold:#c9a45c;
+  --gold-2:#e4c88c;
+  --line:rgba(201,164,92,.28);
+  --line-soft:rgba(236,230,218,.10);
+  --rage:#c4452d;
+  --rage-2:#e25a3c;
+  --rage-dim:rgba(196,69,45,.18);
+  --serif:"Instrument Serif","Times New Roman",serif;
+  --sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --pad:clamp(20px,5vw,72px);
+  --max:1200px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--ink);color:var(--bone)}
+body{
+  font:400 18px/1.6 var(--sans);
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--rage);color:var(--bone)}
+
+/* grain + faint red wash */
+body::before{
+  content:"";
+  pointer-events:none;
+  position:fixed;inset:0;z-index:400;
+  opacity:.07;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;
+}
+.skip{
+  position:absolute;left:-999px;top:0;
+}
+.skip:focus{left:16px;top:16px;z-index:500;background:var(--bone);color:var(--ink);padding:12px 16px;min-height:44px;display:inline-flex;align-items:center}
+
+.demo-bar{
+  position:relative;z-index:210;
+  background:var(--rage);
+  color:#fff;
+  text-align:center;
+  font:600 11px/1.3 var(--sans);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:10px var(--pad);
+}
+.demo-bar a{text-decoration:underline;text-underline-offset:3px}
+
+.hdr{
+  position:sticky;top:0;z-index:200;
+  background:rgba(10,10,9,.92);
+  border-bottom:1px solid var(--line-soft);
+}
+.hdr .wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 var(--pad);
+  height:72px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.brand{display:flex;align-items:center;gap:12px;min-height:44px}
+.brand .mark{width:36px;height:36px}
+.brand span{font:600 12px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase}
+.nav{display:flex;align-items:center;gap:clamp(16px,3vw,32px)}
+.nav a{
+  font:500 12px/1 var(--sans);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--bone-2);
+  padding:14px 0;
+  min-height:44px;
+  display:inline-flex;align-items:center;
+  transition:color .3s var(--ease);
+}
+.nav a:hover,.nav a:focus-visible{color:var(--bone)}
+.nav .ghost{color:var(--gold-2)}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+/* hero */
+.hero{
+  position:relative;
+  padding:clamp(48px,8vw,110px) 0 clamp(64px,10vw,140px);
+  background:
+    radial-gradient(900px 480px at 80% -10%, rgba(196,69,45,.22), transparent 60%),
+    radial-gradient(700px 400px at 0% 80%, rgba(201,164,92,.08), transparent 55%),
+    var(--ink);
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg, transparent, var(--rage), var(--gold), transparent);
+}
+.kicker{
+  display:flex;align-items:center;gap:14px;
+  font:600 11px/1 var(--sans);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--rage-2);
+  margin:0 0 28px;
+}
+.kicker::before{
+  content:"";
+  width:36px;height:2px;background:var(--rage);
+}
+h1{
+  margin:0;
+  font:400 clamp(52px,12.4vw,148px)/.88 var(--sans);
+  letter-spacing:-.04em;
+  text-transform:uppercase;
+  font-weight:700;
+  max-width:16ch;
+}
+h1 .line{display:block}
+h1 .glitch{
+  display:block;
+  position:relative;
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:-.03em;
+  text-transform:none;
+  color:var(--gold-2);
+  margin-top:.06em;
+  animation:shake 4.8s var(--ease) infinite;
+}
+h1 .glitch::before,
+h1 .glitch::after{
+  content:attr(data-text);
+  position:absolute;left:0;top:0;
+  width:100%;
+  overflow:hidden;
+  pointer-events:none;
+}
+h1 .glitch::before{
+  color:var(--rage-2);
+  clip-path:inset(0 0 55% 0);
+  transform:translate(-3px,0);
+  animation:glitch-a 3.6s steps(2,end) infinite;
+  opacity:.85;
+}
+h1 .glitch::after{
+  color:var(--gold);
+  clip-path:inset(55% 0 0 0);
+  transform:translate(3px,0);
+  animation:glitch-b 3.6s steps(2,end) infinite;
+  opacity:.7;
+}
+@keyframes shake{
+  0%,88%,100%{transform:translate3d(0,0,0)}
+  90%{transform:translate3d(-3px,.5px,0) rotate(-.15deg)}
+  92%{transform:translate3d(3px,-1px,0) rotate(.2deg)}
+  94%{transform:translate3d(-2px,1px,0)}
+  96%{transform:translate3d(2px,0,0)}
+  98%{transform:translate3d(-1px,-.5px,0)}
+}
+@keyframes glitch-a{
+  0%,92%,100%{transform:translate(-2px,0);opacity:.0}
+  93%{transform:translate(-4px,1px);opacity:.9}
+  95%{transform:translate(3px,-1px);opacity:.6}
+  97%{transform:translate(-3px,0);opacity:.8}
+}
+@keyframes glitch-b{
+  0%,92%,100%{transform:translate(2px,0);opacity:.0}
+  93%{transform:translate(5px,-1px);opacity:.8}
+  95%{transform:translate(-3px,1px);opacity:.5}
+  97%{transform:translate(3px,0);opacity:.7}
+}
+.lede{
+  margin:36px 0 0;
+  max-width:38em;
+  font:400 clamp(18px,2.1vw,22px)/1.55 var(--sans);
+  color:var(--bone-2);
+}
+.lede strong{color:var(--bone);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:14px;
+  padding:18px 28px;min-height:54px;
+  background:var(--rage);color:#fff;
+  border:1px solid var(--rage);
+  font:600 12px/1 var(--sans);
+  letter-spacing:.16em;text-transform:uppercase;
+  transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease);
+}
+.btn:hover,.btn:focus-visible{background:transparent;color:var(--rage-2);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn-gold:hover,.btn-gold:focus-visible{background:transparent;color:var(--gold-2)}
+.btn-ghost{
+  background:transparent;color:var(--bone);border:1px solid var(--line);
+}
+.btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--gold);color:var(--gold-2);background:transparent}
+.meta{
+  margin-top:22px;
+  font:400 13px/1.5 var(--sans);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--mute);
+}
+
+/* furious list */
+.furious{
+  padding:clamp(72px,12vw,140px) 0;
+  border-bottom:1px solid var(--line-soft);
+  background:var(--ink-2);
+}
+.sec-label{
+  font:600 11px/1 var(--sans);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--rage-2);
+  margin:0 0 16px;
+}
+h2{
+  margin:0 0 48px;
+  font:700 clamp(36px,6.5vw,72px)/.95 var(--sans);
+  letter-spacing:-.035em;
+  text-transform:uppercase;
+  max-width:16ch;
+}
+h2 em{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  text-transform:none;
+  color:var(--gold-2);
+  letter-spacing:-.03em;
+}
+.charges{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-soft)}
+.charges li{
+  display:grid;
+  grid-template-columns:72px 1fr;
+  gap:20px;
+  align-items:baseline;
+  padding:28px 0;
+  border-bottom:1px solid var(--line-soft);
+}
+.charges .n{
+  font:600 13px/1 var(--sans);
+  letter-spacing:.14em;
+  color:var(--rage-2);
+}
+.charges h3{
+  margin:0 0 8px;
+  font:700 clamp(22px,3.2vw,34px)/1.15 var(--sans);
+  letter-spacing:-.03em;
+  text-transform:uppercase;
+}
+.charges p{margin:0;color:var(--bone-2);max-width:46em;font-size:17px}
+
+/* firm */
+.firm{padding:clamp(72px,12vw,140px) 0;border-bottom:1px solid var(--line-soft)}
+.firm-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:48px;
+}
+@media (min-width:860px){
+  .firm-grid{grid-template-columns:1.1fr .9fr;gap:80px;align-items:start}
+}
+.firm p.lead{
+  font:400 clamp(22px,3vw,32px)/1.35 var(--serif);
+  color:var(--bone);
+  margin:0 0 24px;
+}
+.firm p{margin:0 0 16px;color:var(--bone-2)}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+.pillars div{background:var(--ink);padding:22px 20px}
+.pillars strong{
+  display:block;
+  font:700 13px/1 var(--sans);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gold-2);
+  margin-bottom:8px;
+}
+.pillars span{color:var(--bone-2);font-size:15px;line-height:1.45}
+
+/* packages */
+.pkgs{padding:clamp(72px,12vw,140px) 0;border-bottom:1px solid var(--line-soft)}
+.pkg-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+@media (min-width:720px){
+  .pkg-grid{grid-template-columns:repeat(3,1fr)}
+}
+.pkg{
+  display:flex;flex-direction:column;
+  border:1px solid var(--line-soft);
+  padding:28px 24px 24px;
+  background:#0d0c0b;
+  min-height:100%;
+  transition:border-color .3s var(--ease),transform .3s var(--ease);
+}
+.pkg:hover,.pkg:focus-within{border-color:var(--rage);transform:translateY(-2px)}
+.pkg.feat{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,164,92,.08),transparent 40%),#120f0c}
+.pkg .who{
+  font:600 11px/1 var(--sans);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin:0 0 10px;
+}
+.pkg h3{
+  margin:0 0 12px;
+  font:700 22px/1 var(--sans);
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+}
+.pkg .price{
+  font:400 34px/1 var(--serif);
+  color:var(--bone);
+  margin:0 0 4px;
+}
+.pkg .price small{font-family:var(--sans);font-size:13px;color:var(--mute);letter-spacing:.04em;font-style:normal}
+.pkg .term{color:var(--mute);font-size:13px;margin:0 0 16px}
+.pkg p{margin:0 0 20px;color:var(--bone-2);font-size:15px;flex:1}
+.pkg .btn{width:100%;margin-top:auto}
+.note{margin:28px 0 0;color:var(--mute);font-size:14px;max-width:52em}
+
+/* close */
+.close{
+  padding:clamp(80px,14vw,160px) 0;
+  text-align:left;
+  background:
+    radial-gradient(700px 400px at 20% 0%, rgba(196,69,45,.2), transparent 60%),
+    var(--ink);
+  position:relative;
+}
+.close h2{margin-bottom:16px;max-width:18ch}
+.close p{color:var(--bone-2);max-width:36em;font-size:19px}
+.foot{
+  border-top:1px solid var(--line-soft);
+  padding:36px 0 48px;
+  color:var(--mute);
+  font-size:14px;
+}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:flex-start}
+.foot a{color:var(--bone-2);text-decoration:underline;text-underline-offset:3px}
+.foot a:hover{color:var(--gold-2)}
+.wordmark{font:600 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--bone);margin:0 0 8px}
+.legal{max-width:46em}
+
+@media (max-width:700px){
+  .nav .hide-sm{display:none}
+  h1{font-size:clamp(48px,16vw,86px)}
+  .charges li{grid-template-columns:48px 1fr;gap:12px;padding:22px 0}
+  .pillars{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  h1 .glitch,h1 .glitch::before,h1 .glitch::after{animation:none}
+  h1 .glitch::before,h1 .glitch::after{opacity:0}
+  .btn,.pkg{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="demo-bar">Preview only — this is not the live McCrawAI site. <a href="https://mccrawai.com/">Go to mccrawai.com</a></div>
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="https://mccrawai.com/" title="McCrawAI live site">
+      <svg class="mark" role="img" aria-label="McCrawAI" xmlns="http://www.w3.org/2000/svg" viewBox="461 420 339 342" width="339" height="342"><title>McCrawAI</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="477" y1="436" x2="784" y2="746">
+<stop offset="0" stop-color="#F8DA94"/><stop offset=".22" stop-color="#DFB46B"/><stop offset=".45" stop-color="#BA8848"/>
+<stop offset=".62" stop-color="#EDC982"/><stop offset=".82" stop-color="#C99652"/><stop offset="1" stop-color="#A9773C"/></linearGradient><radialGradient id="r" gradientUnits="userSpaceOnUse" cx="757.4" cy="448.7" r="30.3"><stop offset="0" stop-color="#FBE3A6"/><stop offset=".5" stop-color="#D9AC62"/><stop offset="1" stop-color="#A9773C"/></radialGradient></defs><path fill="url(#g)" fill-rule="evenodd" d="M763 492c-2.25 1.5-10 8-14.5 12.25-5.75 5.75-18 16-30.25 25.25-1 0.75-2.75 2.25-4 3.25-2.25 2.25-8.5 7.5-13.75 11.75-1.75 1.25-4.25 3.5-5.75 4.75-1.25 1.25-4.25 3.75-6.5 5.5-5 4.5-7.5 6.75-16 14.5-3.75 3.25-8.25 7.25-10 8.75-2 1.75-6 5.25-8.75 7.75-2.75 2.5-6.75 6.25-9 8.25-2.25 1.75-5.25 4.5-6.75 6.25-1.75 1.5-5.75 5-9 7.75-3.25 3-7.5 6.75-9.5 8.5-4 3.5-4.5 4-5.25 3.75-0.25-0-2.75-2.25-5.75-5-9.5-9.5-17.25-16.75-21.5-20.75-2.25-2-6.5-6-9.5-9-3.25-3-7.75-7.5-10.5-10-2.75-2.5-5.75-5.25-6.5-6.25-1-1-4.75-4.75-8.5-8.25-3.75-3.5-9-8.75-11.5-11.25-2.75-2.5-5.75-5.5-6.75-6.25-3.5-3.25-22.25-21.5-28.25-27.5-10-10-21.25-20.5-24.5-23-1.5-1-2.5-1.25-3.25-0.5l-0.25 0.5-0.25 4c-0.25 2.5-0.25 5.75 0 8.25 0.25 3.25 0.25 14.25 0 38.75 0 19 0 36.25 0 38.75 0 2.5 0 40 0.25 83.75 0 55.75 0 79.5 0.25 79.75 0.75 0.75 1.5 0.25 4.25-2.25 1.5-1.25 4.25-3.5 6-4.75 6.75-5.5 9.75-8 10-8.75l0.25-0.5 0-52c0-28.75 0-52.25 0-52.25-0.25-0.25-0.25-82.5 0-85.25l0.25-2.75 0.25-0.25c0.25-0 2.25 1.5 4.5 3.5 2.25 1.75 6.75 5.25 9.75 7.75 3 2.5 7.75 6.25 10.25 8.5 2.75 2 6.75 5.5 9.25 7.25 4.5 3.75 11.25 9.25 14.75 12 0.75 1 3.5 3 5.75 4.75 2 1.75 5.5 4.5 7.25 6 1.75 1.5 5 4 6.75 5.5 5.5 4.25 10.5 8.25 19.5 15.75 1 0.75 2.75 2.25 4.25 3.25 1.5 1.25 3.5 3 4.75 4 1.25 1 3.5 2.75 5.25 4 1.5 1.25 3.75 3 5 4l2.25 1.75 0 0.75 0 0.5-2.75 2.5c-1.5 1.5-3.75 3.75-5.25 5-1.5 1.25-4.25 3.75-6.25 5.5-2.25 2-5.25 4.75-7 6.25-1.75 1.5-4.25 3.75-5.75 4.75-2.25 2.25-9 8-13.5 12-1.25 1-3.25 3-4.75 4-5.75 5.5-13.75 12.25-22.25 19-6 4.75-12.5 11-12.5 12.25 0 0.75 0.75 0.75 1.5 0.25 1-0.5 12-8.75 17.25-12.75 10-8.25 11.5-9.25 15.25-12.25 2-1.75 4.75-3.75 5.75-4.5 1.75-1.25 7.5-5.75 14.25-11 1.75-1.5 4.25-3.5 5.5-4.25 1.25-1 3.75-2.75 5.5-4.25 1.5-1.25 3.75-3 5-3.75 1.25-0.75 3.25-2.25 4.5-3.5 3.25-2.5 8-6.25 12.25-9 1.75-1.5 4-3 5-3.75 3.5-2.75 8-6.25 11.5-8.75 1.75-1.5 6-4.75 9-7 3-2.25 6.5-4.75 7.5-5.5 1-0.75 3.25-2.5 5.25-3.75 1.75-1.5 5-4 7.5-5.75 2.25-1.75 5.75-4.25 7.25-5.25 6.75-5 15-11 17-12.25 1-0.75 3-2.25 4.5-3.25 1.25-1 3.5-2.75 5.25-4 1.5-1.25 3.5-3 4.75-4 3.75-3 9-7 9.5-7l0.5 0.25 0 3.25c0.25 1.75 0 7.25 0 12-0.5 11.25-0.25 120.75 0.25 121.25 0.25 0.75 3.5 3.5 8.25 6.75 2 1.75 5.25 4.25 7 5.75 1.75 1.5 5.25 4.25 7.5 6 3.75 3 10.5 8.25 14 11.5 1 0.75 3 2.5 4.75 3.75 1.5 1.25 4 3.5 5.25 4.5 7.75 7.25 12.25 10.25 13.25 9 0.5-0.75 0.5-18 0.75-103.5 0-47.5 0-88 0-90.25 0-2 0-16.75 0-32.25l-0.25-28.25-0.5-0.5-0.5-0.5-2.5-0-2.25-0-1 0.5zm-14.75 17c0.25 0.25 0.25 5.75 0 21.75-0.25 24.75-0.25 19.5 0 53 0.25 33.5 0.5 138 0.25 138.75-0.5 0.75-1 0.75-2.25-0.5-0.75-0.5-2.75-2.25-4.75-4-2.25-1.75-5.25-4.25-6.75-5.5-1.5-1.5-3.5-3-4.5-3.75-0.75-0.75-1.75-1.5-1.75-1.75-0.25-0.5-0.25-17-0.5-64 0-34.75 0-68 0-73.5-0.25-12.75 0.25-41.75 0.5-43l0.25-1 6.5-6c11-10.25 12.25-11.25 13-10.5z"/><circle cx="764.5" cy="455.7" r="20.2" fill="url(#r)"/></svg>
+
+      <span>McCraw AI</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a class="hide-sm" href="#furious">What makes us furious</a>
+      <a class="hide-sm" href="#packages">Packages</a>
+      <a href="https://mccrawai.com/watch/">Watch the film</a>
+      <a class="ghost" href="https://mccrawai.com/book-a-call/">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">This makes us furious</p>
+      <h1>
+        <span class="line">Excellent work.</span>
+        <span class="glitch" data-text="Nobody saw it.">Nobody saw it.</span>
+      </h1>
+      <p class="lede">Every town has a business doing excellent work that nobody online has heard of. That gap should make you furious. <strong>It already makes us furious.</strong> Closing it is the job.</p>
+      <div class="actions">
+        <a class="btn" href="https://mccrawai.com/book-a-call/">Book the call</a>
+        <a class="btn btn-ghost" href="https://mccrawai.com/watch/">Watch the film</a>
+      </div>
+      <p class="meta">Strategy call · Mon–Sat · 9–5 MT · Longmont, Colorado · Est. 2022</p>
+    </div>
+  </section>
+
+  <section class="furious" id="furious">
+    <div class="wrap">
+      <p class="sec-label">01 / The charge sheet</p>
+      <h2>Things that make us <em>furious</em></h2>
+      <ol class="charges">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <h3>A website that hides the work you’re proud of</h3>
+            <p>If a stranger can’t tell what you do, and why you’re the one to call, the site is working against you.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <h3>A Google listing left to rot</h3>
+            <p>People search, see a neglected profile, and move on. You already did the hard part. The listing should be doing the rest.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <h3>Missed calls. A competitor who picked up.</h3>
+            <p>Someone needed the work you do. They called. Nobody answered. The job went down the street. That should piss you off. It pisses us off.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">04</span>
+          <div>
+            <h3>Stock footage standing in for real people</h3>
+            <p>Real work and real people beat stock footage and AI faces. Every time. Your craft should be on camera, not a rented smile.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">05</span>
+          <div>
+            <h3>A brand that dies with its founder</h3>
+            <p>What we build should still be standing when you hand the business down. Anything shorter than that is a damn waste.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="firm" id="firm">
+    <div class="wrap firm-grid">
+      <div>
+        <p class="sec-label">02 / What we do about it</p>
+        <h2>We built a firm that <em>won’t sit still.</em></h2>
+        <p class="lead">McCrawAI is a consulting firm for owner-run businesses whose work is better than their reputation online.</p>
+        <p>We plan it, film it, edit it, post it and grow it. Websites, content, growth, and the kind of brand you can hand down. You keep doing the work you’re proud of.</p>
+        <p>We don’t take every business that calls. Only the ones ready to be seen. One conversation and we’ll both know.</p>
+      </div>
+      <div class="pillars" aria-label="What McCrawAI builds">
+        <div><strong>Websites</strong><span>Owned, or hosted and kept up. You keep the domain and the content.</span></div>
+        <div><strong>Content</strong><span>Real work, turned into media people actually watch.</span></div>
+        <div><strong>Growth</strong><span>Distribution, attention, and a plan that gets reviewed every month.</span></div>
+        <div><strong>Legacy</strong><span>A brand that outlasts its founder. Strategy first. Then the camera.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pkgs" id="packages">
+    <div class="wrap">
+      <p class="sec-label">03 / Start here</p>
+      <h2>Pick a way in. <em>Or book the call.</em></h2>
+      <p class="lede" style="margin:0 0 36px;max-width:40em">These are the live packages and prices from our checkout. Work starts after your first payment is received. Scope is confirmed in writing first.</p>
+      <div class="pkg-grid">
+        <article class="pkg">
+          <p class="who">Monthly · consulting</p>
+          <h3>Content</h3>
+          <p class="price">$2,497 <small>/ month</small></p>
+          <p class="term">4 month minimum</p>
+          <p>YouTube, TikTok, Instagram. Strategy call and written plan. Editing, captions, scheduling, and a monthly review.</p>
+          <a class="btn btn-ghost" href="https://mccrawai.com/checkout/?package=content">Start Content</a>
+        </article>
+        <article class="pkg">
+          <p class="who">Monthly · consulting</p>
+          <h3>Growth</h3>
+          <p class="price">$3,697 <small>/ month</small></p>
+          <p class="term">12 month commitment</p>
+          <p>Everything in Content, plus two extra channels of your choice, competitor analysis, and growth strategy.</p>
+          <a class="btn btn-ghost" href="https://mccrawai.com/checkout/?package=growth">Start Growth</a>
+        </article>
+        <article class="pkg feat">
+          <p class="who">Monthly · consulting</p>
+          <h3>Legacy</h3>
+          <p class="price">$5,497 <small>/ month</small></p>
+          <p class="term">No commitment · month to month</p>
+          <p>Everything in Content, plus three extra channels, SEO and website management, priority service, and brand and legacy planning.</p>
+          <a class="btn btn-gold" href="https://mccrawai.com/checkout/?package=legacy">Start Legacy</a>
+        </article>
+        <article class="pkg">
+          <p class="who">Website</p>
+          <h3>Owned</h3>
+          <p class="price">$1,500 <small>one time</small></p>
+          <p class="term">We build it. You own and run it.</p>
+          <p>A standalone site for owners who want the build, then want to run it themselves.</p>
+          <a class="btn btn-ghost" href="https://mccrawai.com/checkout/?package=website-owned">Start Owned</a>
+        </article>
+        <article class="pkg">
+          <p class="who">Website</p>
+          <h3>Hosted</h3>
+          <p class="price">$997 <small>build</small></p>
+          <p class="term">Then $497 / month · you own the domain and content</p>
+          <p>We build it and host it. Build, hosting, and upkeep. You keep the domain and the content.</p>
+          <a class="btn btn-ghost" href="https://mccrawai.com/checkout/?package=website-hosted">Start Hosted</a>
+        </article>
+        <article class="pkg">
+          <p class="who">Prefer to talk first</p>
+          <h3>Strategy call</h3>
+          <p class="price">Free to book</p>
+          <p class="term">Mon–Sat, 9 AM–5 PM MT</p>
+          <p>A conversation, not a pitch. We map what to build first. Business and Enterprise partnerships are arranged on a call.</p>
+          <a class="btn" href="https://mccrawai.com/book-a-call/">Book the call</a>
+        </article>
+      </div>
+      <p class="note">Pay 4 months upfront on a monthly package and save 10%. A website can also be included with a consulting package. We do not guarantee views, followers, or jobs. Outcomes vary. Questions: <a href="mailto:info@mccrawai.com">info@mccrawai.com</a> or (720) 340-2305.</p>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap">
+      <p class="sec-label">04 / The ask</p>
+      <h2>What will your business be known for in ten years?</h2>
+      <p>Bring the answer or bring the question. One call and we’ll both know. Stop letting a weaker story steal work that should be yours.</p>
+      <div class="actions">
+        <a class="btn" href="https://mccrawai.com/book-a-call/">Book the call</a>
+        <a class="btn btn-ghost" href="https://mccrawai.com/watch/">See how we think</a>
+      </div>
+      <p class="meta">Strategy call · Mon–Sat · 9–5 MT</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <p class="wordmark">McCraw AI</p>
+      <p>Legacy Intelligence. A Higher Standard.<br>Brands that outlast their founders.<br>Media development consulting · Est. 2022</p>
+    </div>
+    <div class="legal">
+      <p>This page is a design demo and is not the live McCrawAI website. The live site is <a href="https://mccrawai.com/">mccrawai.com</a>.</p>
+      <p><a href="https://mccrawai.com/privacy/">Privacy</a> · <a href="https://mccrawai.com/pricing/">Pricing</a> · <a href="mailto:info@mccrawai.com">info@mccrawai.com</a> · <a href="tel:+17203402305">(720) 340-2305</a><br>© 2026 McCrawAI. All rights reserved. Founded by Michael McCraw.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
